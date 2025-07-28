@@ -4,3 +4,5 @@ down:
 	docker compose -f deploy/docker-compose.yml down
 migrations_init:
 	 uv run alembic revision --autogenerate -m "init"
+migrate:
+	alembic -c user_microservice/alembic.ini upgrade head

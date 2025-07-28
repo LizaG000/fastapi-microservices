@@ -1,3 +1,9 @@
+import os
+import sys
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+sys.path.insert(0, BASE_DIR)
+
 import asyncio
 from logging.config import fileConfig
 from typing import cast
@@ -7,9 +13,10 @@ from sqlalchemy import text
 from alembic import context
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from src.config import DatabaseConfig, get_config
-from src.infra.postgres.tables import *
-from src.infra.postgres.schemas import enabled_pg_schemas
+from user_microservice.config import get_config
+from user_microservice.infra.postgres.tables import *
+from user_microservice.infra.postgres.schemas import enabled_pg_schemas
+
 
 cfg = get_config()
 
