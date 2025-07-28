@@ -4,7 +4,7 @@ from sqlalchemy import select
 
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.infra.postgres.tables import BaseDBModel
+from user_microservice.src.infra.postgres.tables import BaseDBModel
 
 @dataclass(slots=True, kw_only=True)
 class PostgresGateway:

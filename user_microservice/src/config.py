@@ -3,7 +3,7 @@ from pydantic import ConfigDict
 from dynaconf import Dynaconf
 from loguru import logger
 
-from src.application.schemas.common import BaseSchema
+from user_microservice.src.application.schemas.common import BaseSchema
 
 
 class ApiConfig(BaseSchema):
@@ -34,7 +34,7 @@ class Config(BaseSchema):
 def get_config() -> Config:
     dynaconf = Dynaconf(
         settings_files=[
-            './deploy/configs/config.toml'
+            '././deploy/configs/config.toml'
         ],
         envvar_prefix='Liza',
         load_dotenv=True,

@@ -5,9 +5,9 @@ from dishka import provide
 from dishka import provide_all
 from fastapi import Request
 
-from src.config import Config
-from src.config import ApiConfig
-from src.config import DatabaseConfig
+from user_microservice.src.config import Config
+from user_microservice.src.config import ApiConfig
+from user_microservice.src.config import DatabaseConfig
 
 class MainProvider(Provider):
     scope = Scope.REQUEST
