@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ../user_microservice/src:/app/user_microservice/src:ro
+      - ../user_microservice:/app/user_microservice:ro
   database:
     image: postgres:15.2
     restart: always
