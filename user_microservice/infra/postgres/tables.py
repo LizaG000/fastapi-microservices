@@ -32,6 +32,20 @@ class BaseDBModel(DeclarativeBase):
     __tablename__: str
     __table_args__: dict[str, str] | tuple = {'schema': 'db_schema'}
 
+    @classmethod
+    def group_by_fields(cls, exclude: list[str] | None = None) -> list:
+        payload = []
+        if not exclude:
+            exclude = []
+
+        for column in cls.__table__.columns:
+            if column.key in exclude:
+                continue
+
+            payload.append(column)
+
+        return payload
+
 class UserModel(BaseDBModel):
     __tablename__ = 'users'
     id: Mapped[uuid_pk]

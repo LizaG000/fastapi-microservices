@@ -3,7 +3,9 @@ from user_microservice.usecase.base import Usecase
 from user_microservice.infra.postgres.gateways.base import CreateGate
 from user_microservice.application.schemas.users import CreateUserSchema
 from user_microservice.infra.postgres.tables import UserModel
+from dataclasses import dataclass
 
+@dataclass(slots=True, frozen=True, kw_only=True)
 class CreateUserUsecase(Usecase[CreateUserSchema, None]):
     session: AsyncSession
     create_user: CreateGate[UserModel, CreateUserSchema]
