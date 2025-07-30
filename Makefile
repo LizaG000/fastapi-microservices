@@ -9,8 +9,7 @@ migrations_init:
 	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini revision --autogenerate -m "init"
 
 makemigrations:
-	docker exec -it deploy-user_microservice-1
-	alembic -c user_microservice/alembic.ini revision --autogenerate -m "$(MSG)"
+	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini revision --autogenerate -m "$(MSG)"
 
 migrate:
 	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini upgrade head
