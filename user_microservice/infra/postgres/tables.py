@@ -43,5 +43,17 @@ class UserModel(BaseDBModel):
         Integer,
         nullable=True
     )
+    phone: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False
+    )
+    email: Mapped[str] = mapped_column(
+        String(200),
+        nullable=False
+    )
+    password: Mapped[str] = mapped_column(
+        String(200),
+        nullable=False
+    )
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]

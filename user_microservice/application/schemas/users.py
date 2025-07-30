@@ -6,9 +6,15 @@ class UserSchemas(BaseModel):
     id: UUID
     name: str
     age: int
+    phone: int
+    email: str
+    password: SyntaxError
     created_at: datetime
     updated_at: datetime
 
 class CreateUserSchema(BaseModel):
     name: str
     age: int
+    phone: int
+    email: str
+    password: str
