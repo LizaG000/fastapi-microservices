@@ -1,16 +1,17 @@
 version: "3.3"
 
 services:
-  backend:
+  user_microservice:
     build:
       context: ..
-      dockerfile: ./deploy/Dockerfile
+      dockerfile: ./deploy/Dockerfile.user_microservice
     environment:
       CONFIG_PATH: /app/configs/config.toml
     ports:
       - "8000:8000"
     volumes:
       - ../user_microservice:/app/user_microservice:ro
+
   database:
     image: postgres:15.2
     restart: always
@@ -20,6 +21,7 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5433:5432"
+
   pgadmin:
     image: dpage/pgadmin4:latest
     restart: always
@@ -30,5 +32,3 @@ services:
       - "5050:80"
     depends_on:
       - database
-
-

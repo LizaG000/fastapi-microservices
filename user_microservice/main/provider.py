@@ -9,6 +9,8 @@ from user_microservice.config import Config
 from user_microservice.config import ApiConfig
 from user_microservice.config import DatabaseConfig
 
+from user_microservice.usecase.users.create import CreateUserUsecase
+
 class MainProvider(Provider):
     scope = Scope.REQUEST
 
@@ -23,4 +25,8 @@ class MainProvider(Provider):
         return config.database
 
     _request = from_context(provides=Request, scope=Scope.REQUEST)
+
+    _get_usecases = provide_all(
+        CreateUserUsecase,
+    )
 

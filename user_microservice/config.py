@@ -20,10 +20,8 @@ class DatabaseConfig(BaseSchema):
     driver: str = 'postgresql+psycopg_async'
 
     @property
-    def dsn(self) -> str:
+    def dsn(self, db = True) -> str:
         return f'{self.driver}://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}'
-
-
 
 class Config(BaseSchema):
     model_config = ConfigDict(extra='allow', from_attributes=True)

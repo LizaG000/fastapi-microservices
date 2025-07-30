@@ -1,5 +1,6 @@
 import os
 import sys
+from loguru import logger
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 sys.path.insert(0, BASE_DIR)
@@ -31,7 +32,7 @@ if len(config.get_section(config.config_ini_section)['sqlalchemy.url']) == 0:  #
         'sqlalchemy.url',
         cfg.database.dsn,
     )
-
+logger.info(config.get_section(config.config_ini_section)['sqlalchemy.url'])
 # хранит в себе модели
 target_metadata = BaseDBModel.metadata
 # хранит в себе имена схем
