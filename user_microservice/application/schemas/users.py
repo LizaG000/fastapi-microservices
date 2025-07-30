@@ -8,7 +8,7 @@ class UserSchemas(BaseModel):
     age: int
     phone: int
     email: str
-    password: SyntaxError
+    password: str
     created_at: datetime
     updated_at: datetime
 
