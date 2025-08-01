@@ -7,6 +7,7 @@ from user_microservice.config import DatabaseConfig
 from loguru import logger
 from user_microservice.infra.postgres.gateways.base import GetAllGate
 from user_microservice.infra.postgres.gateways.base import CreateGate
+from user_microservice.infra.postgres.gateways.users import GetByLoginUser
 
 class PostgresProvider(Provider):
     scope = Scope.REQUEST
@@ -63,3 +64,9 @@ class PostgresProvider(Provider):
             table=table,
             create_schema_type=create_schema_type,
         )
+    
+    _provide_all_gates = provide_all(
+        GetByLoginUser,
+    )
+
+

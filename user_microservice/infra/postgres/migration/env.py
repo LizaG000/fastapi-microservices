@@ -32,7 +32,6 @@ if len(config.get_section(config.config_ini_section)['sqlalchemy.url']) == 0:  #
         'sqlalchemy.url',
         cfg.database.dsn,
     )
-logger.info(config.get_section(config.config_ini_section)['sqlalchemy.url'])
 # хранит в себе модели
 target_metadata = BaseDBModel.metadata
 # хранит в себе имена схем
