@@ -1,5 +1,5 @@
 [project]
-name = "base-fast-api"
+name = "fastapi-microservices"
 version = "0.1.0"
 description = ""
 authors = [
