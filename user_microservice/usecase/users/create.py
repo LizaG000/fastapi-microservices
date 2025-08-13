@@ -7,7 +7,6 @@ from user_microservice.application.schemas.users import UserSchemas
 from user_microservice.infra.postgres.gateways.users import  GetEmailOrPhoneGate
 from user_microservice.application.errors import DataNotFoundError, ConflictPhoneError, ConflictEmailError
 from dataclasses import dataclass
-from loguru import logger
 
 @dataclass(slots=True, frozen=True, kw_only=True)
 class CreateUserUsecase(Usecase[CreateUserSchema, UserSchemas]):
