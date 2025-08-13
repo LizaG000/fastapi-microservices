@@ -36,7 +36,6 @@ class GetEmailOrPhoneGate(PostgresGateway):
             UserModel.phone == phone
         )))
         result = (await self.session.execute(stmt)).mappings().first()
-        logger.info(result)
         if result is None:
             raise DataNotFoundError(UserModel)
         return UserSchemas.model_validate(result)
