@@ -7,7 +7,8 @@ from user_microservice.config import DatabaseConfig
 from loguru import logger
 from user_microservice.infra.postgres.gateways.base import GetAllGate
 from user_microservice.infra.postgres.gateways.base import CreateGate
-from user_microservice.infra.postgres.gateways.users import GetByLoginUser
+from user_microservice.infra.postgres.gateways.base import CreateReturningGate
+from user_microservice.infra.postgres.gateways.users import GetByLoginUserGate, GetEmailOrPhoneGate
 
 class PostgresProvider(Provider):
     scope = Scope.REQUEST
@@ -64,9 +65,30 @@ class PostgresProvider(Provider):
             table=table,
             create_schema_type=create_schema_type,
         )
-    
+
     _provide_all_gates = provide_all(
-        GetByLoginUser,
+        GetByLoginUserGate,
+        GetEmailOrPhoneGate,
     )
+
+    @provide
+    async def _crate_returning_gate[
+        TTable,
+        TCreate,
+        TReturningSchema,
+    ](
+        self,
+        table: type[TTable],
+        create_schema_type: type[TCreate],
+        returning_schema_type: type[TReturningSchema],
+        session: AsyncSession,
+    ) -> CreateReturningGate[TTable, TCreate, TReturningSchema]:
+        return  CreateReturningGate(
+            session=session,
+            table=table,
+            create_schema_type=create_schema_type,
+            return_schema_type=returning_schema_type,
+        )
+
 
 

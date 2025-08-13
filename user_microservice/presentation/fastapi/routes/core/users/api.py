@@ -17,8 +17,8 @@ async def get_users(usecase: FromDishka[GetUsersUsecase]) -> list[UserSchemas]:
 @ROUTER.post('', status_code=status.HTTP_200_OK)
 async def create_users(
     usecase: FromDishka[CreateUserUsecase],
-    user: CreateUserSchema) -> None:
-    await usecase(user)
+    user: CreateUserSchema) -> UserSchemas:
+    return await usecase(user)
 
 @ROUTER.get('/login', status_code=status.HTTP_200_OK)
 async def get_user(
