@@ -7,6 +7,11 @@ services:
       dockerfile: ./deploy/Dockerfile.user_microservice
     environment:
       CONFIG_PATH: /app/configs/config.toml
+        - HOST=${HOST}
+        - PORT=${PORT}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "8000:8000"
     volumes:
@@ -17,9 +22,9 @@ services:
     image: postgres:15.2
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "5433:5432"
     volumes:
