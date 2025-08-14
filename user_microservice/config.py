@@ -20,14 +20,25 @@ class DatabaseConfig(BaseSchema):
     driver: str = 'postgresql+psycopg_async'
 
     @property
-    def dsn(self, db = True) -> str:
-        logger.info(f'{self.driver}://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}')
+    def dsn(self,) -> str:
         return f'{self.driver}://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}'
+
+class RabbitMQConfig(BaseSchema):
+    user: str = 'rabbitmq'
+    password: str = 'rabbitmq'
+    vhost: str = '/'
+    host: str = 'localhost'
+    port: int = 5672
+
+    @property
+    def dsn(self,) -> str:
+        return f'amqp://{self.user}:{self.password}@{self.host}:{self.port}{self.vhost}'
 
 class Config(BaseSchema):
     model_config = ConfigDict(extra='allow', from_attributes=True)
     api: ApiConfig
     database: DatabaseConfig
+    rabbitmq: RabbitMQConfig
 
 
 def get_config() -> Config:

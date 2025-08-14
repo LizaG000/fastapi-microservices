@@ -60,10 +60,24 @@ services:
       - ../task_microservice:/app/task_microservice:ro
       - ../task_microservice/infra/postgres/migrations/versions:/app/task_microservice/infra/postgres/migrations/versions:rw
 
-
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq
+        - rabbitmq_conf:/etc/rabbitmq
 
 
 
 volumes:
   pgdata:
   pgadmin_data:
+  rabbitmq_data:
+  rabbitmq_conf:
