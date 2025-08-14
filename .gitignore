@@ -3,3 +3,4 @@
 config.toml
 deploy/.env
 .idea
+__pycache__
