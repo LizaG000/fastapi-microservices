@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from user_microservice.usecase.base import Usecase
 from user_microservice.infra.postgres.gateways.base import GetAllGate
-from user_microservice.application.schemas.users import UserSchemas
+from user_microservice.application.schemas.user import UserSchemas
 from user_microservice.infra.postgres.tables import UserModel
 from dataclasses import dataclass
 

@@ -66,11 +66,6 @@ class PostgresProvider(Provider):
             create_schema_type=create_schema_type,
         )
 
-    _provide_all_gates = provide_all(
-        GetByLoginUserGate,
-        GetEmailOrPhoneGate,
-    )
-
     @provide
     async def _crate_returning_gate[
         TTable,
@@ -89,6 +84,11 @@ class PostgresProvider(Provider):
             create_schema_type=create_schema_type,
             return_schema_type=returning_schema_type,
         )
+
+    _provide_all_gates = provide_all(
+        GetByLoginUserGate,
+        GetEmailOrPhoneGate,
+    )
 
 
 

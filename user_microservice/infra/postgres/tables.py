@@ -30,7 +30,7 @@ updated_at = Annotated[datetime, mapped_column(
 
 class BaseDBModel(DeclarativeBase):
     __tablename__: str
-    __table_args__: dict[str, str] | tuple = {'schema': 'db_schema'}
+    __table_args__: dict[str, str] | tuple = {'schema': 'user_schema'}
 
     @classmethod
     def group_by_fields(cls, exclude: list[str] | None = None) -> list:

@@ -1,9 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from user_microservice.usecase.base import Usecase
 from user_microservice.infra.postgres.gateways.base import CreateReturningGate
-from user_microservice.application.schemas.users import CreateUserSchema
+from user_microservice.application.schemas.user import CreateUserSchema
 from user_microservice.infra.postgres.tables import UserModel
-from user_microservice.application.schemas.users import UserSchemas
+from user_microservice.application.schemas.user import UserSchemas
 from user_microservice.infra.postgres.gateways.users import  GetEmailOrPhoneGate
 from user_microservice.application.errors import DataNotFoundError, ConflictPhoneError, ConflictEmailError
 from dataclasses import dataclass

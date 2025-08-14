@@ -8,6 +8,7 @@ from fastapi import Request
 from task_microservice.config import Config
 from task_microservice.config import ApiConfig
 from task_microservice.config import DatabaseConfig
+from task_microservice.usecase.users.login_user import LoginUserUsecase
 
 class MainProvider(Provider):
     scope = Scope.REQUEST
@@ -23,4 +24,8 @@ class MainProvider(Provider):
         return config.database
 
     _request = from_context(provides=Request, scope=Scope.REQUEST)
+
+    _get_usecases = provide_all(
+        LoginUserUsecase,
+    )
 

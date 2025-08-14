@@ -6,5 +6,5 @@ from fastapi import status
 ROUTER = APIRouter(route_class=DishkaRoute)
 
 @ROUTER.get('', status_code=status.HTTP_200_OK)
-async def get_test() -> str:
+async def login_user() -> str:
     return "УРАААААА"

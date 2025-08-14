@@ -30,10 +30,10 @@ updated_at = Annotated[datetime, mapped_column(
 
 class BaseDBModel(DeclarativeBase):
     __tablename__: str
-    __table_args__: dict[str, str] | tuple = {'schema': 'db_schema'}
+    __table_args__: dict[str, str] | tuple = {'schema': 'task_schema'}
 
 class UserModel(BaseDBModel):
-    __tablename__ = 'users_task'
+    __tablename__ = 'users'
     id: Mapped[uuid_pk]
     name: Mapped[str] = mapped_column(
         String(255),
