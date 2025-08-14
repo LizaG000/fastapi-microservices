@@ -1,8 +1,8 @@
 from dishka.integrations.fastapi import DishkaRoute
 from fastapi import APIRouter
 from fastapi import FastAPI
-from task_microserver.config import Config
-from task_microserver.presentation.fastapi.routes.core.setup import setup_core_router
+from task_microservice.config import Config
+from task_microservice.presentation.fastapi.routes.core.setup import setup_core_router
 
 def setup_routes(app: FastAPI, config: Config) -> None:
     router = APIRouter(prefix='/api', route_class=DishkaRoute)

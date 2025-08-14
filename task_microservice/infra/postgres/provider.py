@@ -3,7 +3,7 @@ from dishka import Provider, Scope, provide, provide_all
 from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.ext.asyncio import create_async_engine
-from task_microserver.config import DatabaseConfig
+from task_microservice.config import DatabaseConfig
 from loguru import logger
 
 class PostgresProvider(Provider):

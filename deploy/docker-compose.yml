@@ -16,7 +16,7 @@ services:
       - "8000:8000"
     volumes:
       - ../user_microservice:/app/user_microservice:ro
-      - ../user_microservice/infra/postgres/migration/versions:/app/user_microservice/infra/postgres/migration/versions:rw
+      - ../user_microservice/infra/postgres/migrations/versions:/app/user_microservice/infra/postgres/migrations/versions:rw
 
   database:
     image: postgres:15.2

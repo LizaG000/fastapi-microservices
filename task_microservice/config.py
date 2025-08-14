@@ -3,7 +3,7 @@ from pydantic import ConfigDict
 from dynaconf import Dynaconf
 from loguru import logger
 
-from task_microserver.application.schemas.common import BaseSchema
+from task_microservice.application.schemas.common import BaseSchema
 
 
 class ApiConfig(BaseSchema):
