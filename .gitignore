@@ -1,6 +1,6 @@
 .venv
 # Ignore dynaconf secret files
-config.toml
+deploy/configs
 deploy/.env
 .idea
 __pycache__
