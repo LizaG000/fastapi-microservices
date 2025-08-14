@@ -36,7 +36,7 @@ target_metadata = BaseDBModel.metadata
 # хранит в себе имена схем
 target_schemas = list(target_metadata._schemas)
 
-version_schema = '__alembic_schema__'
+version_schema = '__alembic_task_schema'
 
 # проверка всех схем на наличие
 for schema in target_schemas:

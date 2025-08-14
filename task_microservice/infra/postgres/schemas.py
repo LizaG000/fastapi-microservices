@@ -1,4 +1,4 @@
 enabled_pg_schemas: list = [
-    '__alembic_schema__',
-    'db_schema',
+    '__alembic_task_schema',
+    'task_schema',
 ]

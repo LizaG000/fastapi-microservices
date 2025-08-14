@@ -19,13 +19,13 @@ downgrade_user:
 	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini downgrade -1
 
 migrations_init_task:
-	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini revision --autogenerate -m "init"
+	docker exec -it deploy-task_microservice-1 alembic -c task_microservice/alembic.ini revision --autogenerate -m "init"
 
 makemigrations_task:
-	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini revision --autogenerate -m "$(MSG)"
+	docker exec -it deploy-task_microservice-1 alembic -c task_microservice/alembic.ini revision --autogenerate -m "$(MSG)"
 
 migrate_task:
-	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini upgrade head
+	docker exec -it deploy-task_microservice-1 alembic -c task_microservice/alembic.ini upgrade head
 
 downgrade_task:
-	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini downgrade -1
+	docker exec -it deploy-task_microservice-1 alembic -c task_microservice/alembic.ini downgrade -1
