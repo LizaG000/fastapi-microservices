@@ -33,7 +33,7 @@ class BaseDBModel(DeclarativeBase):
     __table_args__: dict[str, str] | tuple = {'schema': 'db_schema'}
 
 class UserModel(BaseDBModel):
-    __tablename__ = 'users'
+    __tablename__ = 'users_task'
     id: Mapped[uuid_pk]
     name: Mapped[str] = mapped_column(
         String(255),

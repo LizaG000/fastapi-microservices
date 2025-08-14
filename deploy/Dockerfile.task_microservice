@@ -4,12 +4,12 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock* /app/
 
-COPY deploy/configs/config_user_microservice.toml /app/deploy/configs/
+COPY deploy/configs/config_task_microservice.toml /app/deploy/configs/
 
 RUN pip install poetry
 
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi --no-root
 
-COPY user_microservice /app/user_microservice
+COPY task_microservice /app/task_microservice
 
 CMD ["uvicorn", "user_microservice.main.web:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

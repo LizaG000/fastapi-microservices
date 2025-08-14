@@ -6,7 +6,7 @@ services:
       context: ..
       dockerfile: ./deploy/Dockerfile.user_microservice
     environment:
-      CONFIG_PATH: /app/configs/config.toml
+      CONFIG_PATH: /app/configs/config_user_microservice.toml
       HOST: ${HOST}
       PORT: ${PORT}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -42,6 +42,28 @@ services:
       - database
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+
+  task_microservice:
+    build:
+      context: ..
+      dockerfile: ./deploy/Dockerfile.task_microservice
+    environment:
+      CONFIG_PATH: /app/configs/config_task_microservice.toml
+      HOST: ${HOST}
+      PORT: ${PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "8001:8001"
+    volumes:
+      - ../task_microservice:/app/task_microservice:ro
+      - ../task_microservice/infra/postgres/migrations/versions:/app/task_microservice/infra/postgres/migrations/versions:rw
+
+
+
+
+
 volumes:
   pgdata:
   pgadmin_data:

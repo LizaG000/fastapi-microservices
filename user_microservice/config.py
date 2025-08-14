@@ -33,7 +33,7 @@ class Config(BaseSchema):
 def get_config() -> Config:
     dynaconf = Dynaconf(
         settings_files=[
-            '././deploy/configs/config.toml'
+            '././deploy/configs/config_user_microservice.toml'
         ],
         envvar_prefix='Liza',
         load_dotenv=True,
