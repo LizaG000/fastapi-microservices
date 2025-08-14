@@ -6,7 +6,6 @@ from sqlalchemy import Select
 from sqlalchemy.sql.dml import ReturningInsert
 from sqlalchemy.sql.dml import ReturningUpdate
 from user_microservice.application.errors import DataNotFoundError
-from loguru import logger
 
 from user_microservice.infra.postgres.tables import BaseDBModel
 

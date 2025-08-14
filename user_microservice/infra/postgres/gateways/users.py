@@ -1,7 +1,4 @@
-from dataclasses import dataclass
-from uuid import UUID
 from sqlalchemy import select, or_
-from loguru import logger
 from user_microservice.application.errors import DataNotFoundError
 from user_microservice.infra.postgres.gateways.base import PostgresGateway
 from user_microservice.infra.postgres.tables import UserModel

@@ -12,15 +12,16 @@ class ApiConfig(BaseSchema):
     project_name: str = 'base'
 
 class DatabaseConfig(BaseSchema):
-    host: str
-    port: int
-    username: str
-    password: str
-    database: str
+    host: str = os.getenv('HOST')
+    port: int = os.getenv('PORT')
+    username: str = os.getenv('POSTGRES_USER')
+    password: str = os.getenv('POSTGRES_PASSWORD')
+    database: str = os.getenv('POSTGRES_DB')
     driver: str = 'postgresql+psycopg_async'
 
     @property
     def dsn(self, db = True) -> str:
+        logger.info(f'{self.driver}://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}')
         return f'{self.driver}://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}'
 
 class Config(BaseSchema):
