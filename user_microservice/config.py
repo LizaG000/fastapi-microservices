@@ -27,7 +27,7 @@ class RabbitMQConfig(BaseSchema):
     user: str = 'rabbitmq'
     password: str = 'rabbitmq'
     vhost: str = '/'
-    host: str = 'localhost'
+    host: str = 'rabbitmq'
     port: int = 5672
 
     @property

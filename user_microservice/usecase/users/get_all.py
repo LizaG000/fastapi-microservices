@@ -5,11 +5,12 @@ from user_microservice.application.schemas.user import UserSchemas
 from user_microservice.infra.postgres.tables import UserModel
 from dataclasses import dataclass
 
+
 @dataclass(slots=True, frozen=True, kw_only=True)
 class GetUsersUsecase(Usecase[None, list[UserSchemas]]):
     session: AsyncSession
     get_users: GetAllGate[UserModel, UserSchemas]
-    
-    async def __call__(self) -> list[UserSchemas]:
+
+    async def __call__(self, ) -> list[UserSchemas]:
         async with self.session.begin():
             return await self.get_users()
