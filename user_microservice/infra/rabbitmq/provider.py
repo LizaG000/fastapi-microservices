@@ -1,7 +1,7 @@
 import aio_pika
 from dishka import Provider, Scope, provide, provide_all
 from aio_pika import connect
-from aio_pika.abc import AbstractConnection, AbstractChannel
+from aio_pika.abc import AbstractConnection, AbstractChannel, AbstractQueue
 from collections.abc import AsyncIterator
 from user_microservice.config import RabbitMQConfig
 from loguru import logger
@@ -41,3 +41,16 @@ class RabbitMQProvider(Provider):
                 logger.error('Error connection to chanel 1', e)
             finally:
                 await chanel.close()
+
+    @provide(scope=Scope.APP)
+    async def _get_queue_1_(self, chanel: AbstractChannel) -> AsyncIterator[AbstractQueue]:
+        queue: AbstractQueue | None = None
+        async with chanel as _chanel:
+            try:
+                if queue is None:
+                    queue = await _chanel.declare_queue("user", durable=True)
+                yield queue
+            except Exception as e:
+                logger.error('Error connection to qeue 1', e)
+            finally:
+                await queue.cancel("user")
