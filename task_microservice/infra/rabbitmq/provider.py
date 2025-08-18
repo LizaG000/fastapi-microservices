@@ -5,6 +5,7 @@ from aio_pika.abc import AbstractConnection, AbstractChannel, AbstractQueue
 from collections.abc import AsyncIterator
 from task_microservice.config import RabbitMQConfig
 from loguru import logger
+from task_microservice.application.schemas.common import FirstChanel, UserQueue
 
 
 class RabbitMQProvider(Provider):
@@ -30,8 +31,8 @@ class RabbitMQProvider(Provider):
                 await connection.close()
 
     @provide(scope=Scope.APP)
-    async def _get_chanel_1_(self, connection: AbstractConnection) -> AsyncIterator[AbstractChannel]:
-        chanel: AbstractChannel | None = None
+    async def _get_chanel_1_(self, connection: AbstractConnection) -> AsyncIterator[FirstChanel]:
+        chanel: FirstChanel | None = None
         async with connection as _connection:
             try:
                 if chanel is None:
@@ -43,8 +44,8 @@ class RabbitMQProvider(Provider):
                 await chanel.close()
 
     @provide(scope=Scope.APP)
-    async def _get_queue_1_(self, chanel: AbstractChannel) -> AsyncIterator[AbstractQueue]:
-        queue: AbstractQueue | None = None
+    async def _get_queue_1_(self, chanel: AbstractChannel) -> AsyncIterator[UserQueue]:
+        queue: UserQueue | None = None
         async with chanel as _chanel:
             try:
                 if queue is None:

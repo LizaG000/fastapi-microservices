@@ -36,7 +36,7 @@ class Config(BaseSchema):
     model_config = ConfigDict(extra='allow', from_attributes=True)
     api: ApiConfig
     database: DatabaseConfig
-    rabbitmq: RabbitMQ
+    rabbitmq: RabbitMQConfig
 
 
 def get_config() -> Config:

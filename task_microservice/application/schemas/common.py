@@ -2,7 +2,7 @@ from pydantic import AliasGenerator
 from pydantic import BaseModel
 from pydantic import ConfigDict
 from pydantic import alias_generators
-
+from aio_pika.abc import AbstractChannel, AbstractQueue
 
 class BaseSchema(BaseModel):
     model_config = ConfigDict(
@@ -10,3 +10,6 @@ class BaseSchema(BaseModel):
         from_attributes=True,
         arbitrary_types_allowed=True,
     )
+
+FirstChanel = AbstractChannel
+UserQueue = AbstractQueue
