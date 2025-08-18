@@ -8,6 +8,7 @@ from fastapi import Request
 from task_microservice.config import Config
 from task_microservice.config import ApiConfig
 from task_microservice.config import DatabaseConfig
+from task_microservice.config import RabbitMQConfig
 from task_microservice.usecase.users.login_user import LoginUserUsecase
 
 class MainProvider(Provider):
@@ -22,6 +23,10 @@ class MainProvider(Provider):
     @provide(scope=Scope.APP)
     async def _get_database_config(self, config: Config) -> DatabaseConfig:
         return config.database
+
+    @provide(scope=Scope.APP)
+    async def _get_rabbitmq_config(self, config: Config) -> RabbitMQConfig:
+        return config.rabbitmq
 
     _request = from_context(provides=Request, scope=Scope.REQUEST)
 

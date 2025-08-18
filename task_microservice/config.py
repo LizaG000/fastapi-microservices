@@ -24,12 +24,19 @@ class DatabaseConfig(BaseSchema):
     def dsn(self) -> str:
         return f'{self.driver}://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}'
 
+class RabbitMQConfig(BaseSchema):
+    user: str = 'rabbitmq'
+    password: str = 'rabbitmq'
+    vhost: str = '/'
+    host: str = 'rabbitmq'
+    port: int = 5672
 
 
 class Config(BaseSchema):
     model_config = ConfigDict(extra='allow', from_attributes=True)
     api: ApiConfig
     database: DatabaseConfig
+    rabbitmq: RabbitMQ
 
 
 def get_config() -> Config:

@@ -30,9 +30,6 @@ class RabbitMQConfig(BaseSchema):
     host: str = 'rabbitmq'
     port: int = 5672
 
-    @property
-    def dsn(self,) -> str:
-        return f'amqp://{self.user}:{self.password}@{self.host}:{self.port}{self.vhost}'
 
 class Config(BaseSchema):
     model_config = ConfigDict(extra='allow', from_attributes=True)

@@ -9,3 +9,12 @@ port=5432
 username='postgres'
 password='postgres'
 database='postgres'
+
+[rabbitmq]
+user = 'rabbitmq'
+password = 'rabbitmq'
+vhost = '/'
+port = 5672
+host = 'rabbitmq'
+
+
