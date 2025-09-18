@@ -1,0 +1,8 @@
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.csproj.AssemblyReference.cache
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.GeneratedMSBuildEditorConfig.editorconfig
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.AssemblyInfoInputs.cache
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.AssemblyInfo.cs
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.csproj.CoreCompileInputs.cache
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.MvcApplicationPartsAssemblyInfo.cs
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.MvcApplicationPartsAssemblyInfo.cache
+/home/liza/Projects/fastapi-microservices/registration/obj/Release/net9.0/registration.sourcelink.json

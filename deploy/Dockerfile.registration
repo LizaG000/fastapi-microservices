@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+
+WORKDIR /app
+
+COPY registration/*.csproj ./registration/
+WORKDIR /app/registration
+RUN dotnet restore
+
+RUN dotnet tool restore
+
+COPY registration/. ./
+RUN dotnet publish -c Release -o /app/publish
+
+WORKDIR /app/publish
+
+EXPOSE 5000
+EXPOSE 7000
+
+ENTRYPOINT ["dotnet", "registration.dll"]
