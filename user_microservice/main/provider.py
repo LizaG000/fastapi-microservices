@@ -11,8 +11,6 @@ from user_microservice.config import DatabaseConfig
 from user_microservice.config import RabbitMQConfig
 
 from user_microservice.usecase.users.create import CreateUserUsecase
-from user_microservice.usecase.users.get_all import GetUsersUsecase
-from user_microservice.usecase.users.get_user import GetUserUsecase
 
 class MainProvider(Provider):
     scope = Scope.REQUEST
@@ -35,7 +33,5 @@ class MainProvider(Provider):
 
     _get_usecases = provide_all(
         CreateUserUsecase,
-        GetUsersUsecase,
-        GetUserUsecase,
     )
 

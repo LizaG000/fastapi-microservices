@@ -1,19 +1,14 @@
 from uuid import UUID
 from datetime import datetime
-from user_microservice.application.schemas.common import BaseModel
+from user_microservice.application.schemas.common import BaseSchema
 
-class UserSchemas(BaseModel):
+class UserSchemas(BaseSchema):
     id: UUID
-    name: str
-    age: int
-    phone: int
-    email: str
+    login: str
+    password: str
     created_at: datetime
     updated_at: datetime
 
-class CreateUserSchema(BaseModel):
-    name: str
-    age: int
-    phone: int
-    email: str
+class CreateUserSchema(BaseSchema):
+    login: str
     password: str

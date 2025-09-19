@@ -6,9 +6,9 @@ COPY registration/*.csproj ./registration/
 WORKDIR /app/registration
 RUN dotnet restore
 
-RUN dotnet tool restore
-
 COPY registration/. ./
+
+RUN dotnet tool restore
 RUN dotnet publish -c Release -o /app/publish
 
 WORKDIR /app/publish

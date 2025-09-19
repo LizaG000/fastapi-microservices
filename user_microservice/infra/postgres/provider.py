@@ -8,7 +8,7 @@ from loguru import logger
 from user_microservice.infra.postgres.gateways.base import GetAllGate
 from user_microservice.infra.postgres.gateways.base import CreateGate
 from user_microservice.infra.postgres.gateways.base import CreateReturningGate
-from user_microservice.infra.postgres.gateways.users import GetByLoginUserGate, GetEmailOrPhoneGate
+from user_microservice.infra.postgres.gateways.users import GetEmailOrPhoneGate
 
 class PostgresProvider(Provider):
     scope = Scope.REQUEST
@@ -86,7 +86,6 @@ class PostgresProvider(Provider):
         )
 
     _provide_all_gates = provide_all(
-        GetByLoginUserGate,
         GetEmailOrPhoneGate,
     )
 

@@ -30,7 +30,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
-app.MapPost("/registrate", (User user) =>
+app.MapPost("/registrate", async (User user, AppDbContext db) =>
 {
     if (string.IsNullOrWhiteSpace(user.FirstName) || !Regex.IsMatch(user.FirstName, @"^[A-Za-zА-Яа-яЁё]+$"))
     {
@@ -56,6 +56,26 @@ app.MapPost("/registrate", (User user) =>
     {
         return Results.BadRequest(new { error = "Некорректный email." });
     }
+
+    var entity = new UserEntity
+    {
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        Age = user.Age,
+        Number = user.Number,
+        Email = user.Email
+    };
+    var existingUser = await db.Users
+    .Where(u => u.Number == user.Number || u.Email == user.Email)
+    .FirstOrDefaultAsync();
+
+    if (existingUser != null)
+    {
+        return Results.BadRequest(new { error = "Пользователь с таким номером телефона или email уже существует." });
+    }
+
+    db.Users.Add(entity);
+    await db.SaveChangesAsync();
 
     return Results.Ok(new
     {

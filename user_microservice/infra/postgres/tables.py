@@ -49,25 +49,13 @@ class BaseDBModel(DeclarativeBase):
 class UserModel(BaseDBModel):
     __tablename__ = 'users'
     id: Mapped[uuid_pk]
-    name: Mapped[str] = mapped_column(
+    login: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
     )
-    age: Mapped[int] = mapped_column(
+    password: Mapped[str] = mapped_column(
         Integer,
         nullable=True
-    )
-    phone: Mapped[int] = mapped_column(
-        Integer,
-        nullable=False
-    )
-    email: Mapped[str] = mapped_column(
-        String(200),
-        nullable=False
-    )
-    password: Mapped[str] = mapped_column(
-        String(200),
-        nullable=False
     )
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
