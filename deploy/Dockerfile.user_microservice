@@ -2,6 +2,8 @@ FROM python:3.12-slim AS user_microservice
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y iproute2 iptables && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y iperf3
 COPY pyproject.toml poetry.lock* /app/
 
 COPY deploy/configs/config_user_microservice.toml /app/deploy/configs/
@@ -12,4 +14,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-interaction --
 
 COPY user_microservice /app/user_microservice
 
-CMD ["uvicorn", "user_microservice.main.web:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+COPY deploy/entrypoint_user.sh /app/entrypoint_user.sh
+RUN chmod +x /app/entrypoint_user.sh
+
+ENTRYPOINT ["/app/entrypoint_user.sh"]

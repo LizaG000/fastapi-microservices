@@ -50,11 +50,11 @@ class UserModel(BaseDBModel):
     __tablename__ = 'users'
     id: Mapped[uuid_pk]
     login: Mapped[str] = mapped_column(
-        String(255),
+        String(200),
         nullable=False,
     )
     password: Mapped[str] = mapped_column(
-        Integer,
+        String(200),
         nullable=True
     )
     created_at: Mapped[created_at]

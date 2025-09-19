@@ -1,7 +1,5 @@
 compose:
 	docker compose -f ./deploy/docker-compose.yml up --build -d
-	docker exec -it deploy-user_microservice-1 alembic -c user_microservice/alembic.ini upgrade head
-	docker exec -it deploy-task_microservice-1 alembic -c task_microservice/alembic.ini upgrade head
 
 down:
 	docker compose -f deploy/docker-compose.yml down

@@ -11,5 +11,5 @@ ROUTER = APIRouter(route_class=DishkaRoute)
 async def create_users(
     usecase: FromDishka[CreateUserUsecase],
     user: CreateUserSchema) -> None:
-    return await usecase(user)
+    await usecase(user)
 

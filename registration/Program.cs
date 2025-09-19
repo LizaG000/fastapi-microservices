@@ -1,6 +1,14 @@
+using System;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Text;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
+var httpClient = new HttpClient();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 
-var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST") ?? "database"};" +
+var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST") ?? "localhost"};" +
                        $"Port={Environment.GetEnvironmentVariable("PORT") ?? "5432"};" +
                        $"Database={Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "postgres"};" +
                        $"Username={Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "postgres"};" +
@@ -29,6 +37,14 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
+string GenerateRandomPassword(int length)
+{
+    const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+    var random = new Random();
+    return new string(Enumerable.Repeat(chars, length)
+      .Select(s => s[random.Next(s.Length)]).ToArray());
+}
 
 app.MapPost("/registrate", async (User user, AppDbContext db) =>
 {
@@ -74,14 +90,38 @@ app.MapPost("/registrate", async (User user, AppDbContext db) =>
         return Results.BadRequest(new { error = "Пользователь с таким номером телефона или email уже существует." });
     }
 
-    db.Users.Add(entity);
-    await db.SaveChangesAsync();
+    var emailPart = user.Email.Split('@')[0];
+    var login = emailPart+"+"+user.Number.Substring(user.Number.Length - 4, 4);
+    var password = GenerateRandomPassword(8);
 
-    return Results.Ok(new
+    var postData = new
     {
-        message = "Регистрация успешна",
-        user
-    });
+        login,
+        password
+    };
+
+    var jsonContent = new StringContent(JsonSerializer.Serialize(postData), Encoding.UTF8, "application/json");
+
+
+    var response = await httpClient.PostAsync("http://172.20.0.10:8000/api/user", jsonContent);
+
+    if (response.IsSuccessStatusCode)
+    {
+
+
+        db.Users.Add(entity);
+        await db.SaveChangesAsync();
+        return Results.Ok(new
+        {
+            message = "Регистрация успешна, логин и пароль отправлены.",
+            user,
+            login,
+        });
+    }
+    else
+    {
+        return Results.BadRequest(new { error = "Некорректные данные" });
+    }
 });
 
 
@@ -91,7 +131,7 @@ public class User
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName  { get; set; } = string.Empty;
-    public int Age          { get; set; }
+    public int Age          { get; set; } = 3;
     public string Number    { get; set; } = string.Empty;
     public string Email     { get; set; } = string.Empty;
 }
